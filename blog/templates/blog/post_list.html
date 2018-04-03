@@ -1,22 +1,13 @@
-<html>
-    <head>
-        <title>AlinaPom blog</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="/">AlinaPom Blog</a></h1>
-        </div>
+{% extends 'blog/base.html' %}
 
-        <div>
-            <p>published: 1.04.2018, 19:10</p>
-            <h2><a href="">Первый пост</a></h2>
-            <p>Текст первого поста</p>
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaksbr }}</p>
         </div>
-
-        <div>
-            <p>published: 1.04.2018, 19:11</p>
-            <h2><a href="">Второй пост</a></h2>
-            <p>Текст второго поста</p>
-        </div>
-    </body>
-</html>
+    {% endfor %}
+{% endblock %}
